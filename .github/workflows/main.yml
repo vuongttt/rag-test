@@ -51,6 +51,7 @@ jobs:
           script: |
             cd /home/leo123/rag_test
             echo "Updating requirements..."
+            source venv/bin/activate
             pip install -r requirements.txt
       - name: SSH into Azure VM and update requirements and run FastAPI
         uses: appleboy/ssh-action@master
@@ -61,4 +62,5 @@ jobs:
           script: |
             cd /home/leo123/rag_test
             echo "Starting FastAPI..."
+            source venv/bin/activate
             uvicorn main:app --host 0.0.0.0 --port 8080 --reload
