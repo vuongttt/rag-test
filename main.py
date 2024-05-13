@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 import uuid
 from typing import Optional
-from rag import answer
+# from rag import answer
 
 app = FastAPI()
 
@@ -43,6 +43,7 @@ def read_item(item: Item = None):
                 else:
                     # write the code for using Langchain to return relavent document
                     # res = model.predict(serial_number)
-                    res, pages = answer(item.alarm_code, serial_number=db[item.session_id])
-                    return {"session_id": item.session_id, "text": res, "relevant_page": pages}
+                    # res, pages = answer(item.alarm_code, serial_number=db[item.session_id])
+                    return {"session_id": item.session_id, "text": "hahaha"}
+                    # return {"session_id": item.session_id, "text": res, "relevant_page": pages}
     return {"session_id": item.session_id, "serial_number": db[item.session_id]}
