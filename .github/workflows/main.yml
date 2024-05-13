@@ -27,4 +27,4 @@ jobs:
           username: ${{ secrets.AZURE_VM_USERNAME }}
           password: ${{ secrets.AZURE_VM_PASSWORD }}
           source: .
-          target: /path/to/destination/folder/on/azure/vm
+          target: /home/leo123/rag_test
