@@ -23,8 +23,8 @@ jobs:
       - name: Copy files to Azure VM
         uses: appleboy/scp-action@master
         with:
-          host: ${{ secrets.azure_secrets.AZURE_VM_HOST }}
-          username: ${{ secrets.azure_secrets.AZURE_VM_USERNAME }}
-          password: ${{ secrets.azure_secrets.AZURE_VM_PASSWORD }}
+          host: ${{ secrets.AZURE_VM_HOST }}
+          username: ${{ secrets.AZURE_VM_USERNAME }}
+          password: ${{ secrets.AZURE_VM_PASSWORD }}
           source: .
           target: /path/to/destination/folder/on/azure/vm
