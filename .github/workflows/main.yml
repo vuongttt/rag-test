@@ -28,3 +28,37 @@ jobs:
           password: ${{ secrets.AZURE_VM_PASSWORD }}
           source: .
           target: /home/leo123/rag_test
+#      - name: SSH into Azure VM and stop FastAPI app
+#          uses: appleboy/ssh-action@master
+#          with:
+#            host: ${{ secrets.AZURE_VM_HOST }}
+#            username: ${{ secrets.AZURE_VM_USERNAME }}
+#            password: ${{ secrets.AZURE_VM_PASSWORD }}
+#            script: |
+#              cd /home/leo123/rag_test
+#              if pgrep uvicorn; then
+#                echo "FastAPI is running, stopping it..."
+#                pkill -f uvicorn
+#              else
+#                echo "FastAPI is not running"
+#              fi
+      - name: SSH into Azure VM and update requirements
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AZURE_VM_HOST }}
+          username: ${{ secrets.AZURE_VM_USERNAME }}
+          password: ${{ secrets.AZURE_VM_PASSWORD }}
+          script: |
+            cd /home/leo123/rag_test
+            echo "Updating requirements..."
+            pip install -r requirements.txt
+      - name: SSH into Azure VM and update requirements and run FastAPI
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.AZURE_VM_HOST }}
+          username: ${{ secrets.AZURE_VM_USERNAME }}
+          password: ${{ secrets.AZURE_VM_PASSWORD }}
+          script: |
+            cd /home/leo123/rag_test
+            echo "Starting FastAPI..."
+            uvicorn main:app --host 0.0.0.0 --port 8080 --reload
